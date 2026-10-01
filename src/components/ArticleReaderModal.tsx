@@ -79,7 +79,7 @@ export const ArticleReaderModal: React.FC<ArticleReaderModalProps> = ({ article,
 
       <Modal.Footer className="bg-slate-900 border-t border-white/10 px-6 py-3 flex justify-between">
         <span className="text-xs text-slate-500">
-          Authored by Devin Vance · Published in {article.publication}
+          Authored by Anovardhan · Published in {article.publication}
         </span>
         <Button variant="outline-glow" size="sm" onClick={onHide} className="btn-outline-glow text-xs py-1.5 px-4 rounded-lg">
           Close Article

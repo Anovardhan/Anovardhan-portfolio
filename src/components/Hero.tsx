@@ -12,7 +12,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onOpenContact }) => {
   const [terminalInput, setTerminalInput] = useState('');
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [terminalLogs, setTerminalLogs] = useState<Array<{ cmd?: string; text: string; type?: 'info' | 'success' | 'warn' | 'dim' }>>([
-    { text: 'Devin Vance System Shell v4.2 [Kernel: React 19.x & Bootstrap 5]', type: 'dim' },
+    { text: 'Anovardhan System Shell v4.2 [Kernel: React 19.x & Bootstrap 5]', type: 'dim' },
     { text: 'Status: Principal Systems Architect · Available for Advisory/Staff Roles', type: 'info' },
     { text: 'Type a command or click quick actions below:', type: 'dim' }
   ]);
@@ -26,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onOpenContact }) => {
     switch (cmd) {
       case 'whoami':
         response = [
-          { text: 'DEVIN VANCE — Principal Systems Architect & Full-Stack Engineer', type: 'success' },
+          { text: 'ANOVARDHAN — Principal Systems Architect & Full-Stack Engineer', type: 'success' },
           { text: 'Specializing in high-throughput distributed architectures, React performance, and production LLM orchestration.', type: 'info' },
           { text: 'Location: San Francisco, CA (Open to global remote)', type: 'dim' }
         ];
@@ -223,7 +223,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onOpenContact }) => {
                     <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
                     <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
                     <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                    <span className="text-xs font-mono text-slate-400 ml-2">devin@arch-node:~</span>
+                    <span className="text-xs font-mono text-slate-400 ml-2">anovardhan@arch-node:~</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <button

@@ -95,7 +95,7 @@ export const ContactSection: React.FC = () => {
 
       setIsSubmitting(false);
       setSubmittedSuccess(true);
-      setToastMessage('Inquiry persisted securely in Firebase Firestore. Devin will respond within 24 hours!');
+      setToastMessage('Inquiry persisted securely in Firebase Firestore. Anovardhan will respond within 24 hours!');
       setShowToast(true);
     } catch (err: any) {
       console.error(err);

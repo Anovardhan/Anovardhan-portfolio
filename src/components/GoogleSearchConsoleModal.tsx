@@ -11,7 +11,7 @@ interface GoogleSearchConsoleModalProps {
 export const GoogleSearchConsoleModal: React.FC<GoogleSearchConsoleModalProps> = ({ show, onHide }) => {
   const [activeTab, setActiveTab] = useState('serp');
   const [deviceView, setDeviceView] = useState<'desktop' | 'mobile'>('desktop');
-  const [searchQuery, setSearchQuery] = useState('Devin Vance Principal Engineer');
+  const [searchQuery, setSearchQuery] = useState('Anovardhan Principal Engineer');
   const [verificationCode, setVerificationCode] = useState('aYdPEGhRqav-54H9Pv298zwsFbq7orAxwGRk_bZQg_g');
   const [verificationSaved, setVerificationSaved] = useState(false);
   const [copiedTag, setCopiedTag] = useState(false);
@@ -64,13 +64,22 @@ export const GoogleSearchConsoleModal: React.FC<GoogleSearchConsoleModalProps> =
         {
           "@type": "ProfilePage",
           "@id": "https://devinvance.io/#profilepage",
+          "url": "https://devinvance.io/",
           "name": `${PERSONAL_INFO.name} Portfolio`,
-          "about": {
+          "description": PERSONAL_INFO.shortBio,
+          "mainEntity": {
             "@type": "Person",
+            "@id": "https://devinvance.io/#person",
             "name": PERSONAL_INFO.name,
             "jobTitle": PERSONAL_INFO.title,
+            "url": "https://devinvance.io/",
             "worksFor": { "@type": "Organization", "name": "Apex Cloud Platforms" },
-            "knowsAbout": ["Distributed Systems", "React 19", "React-Bootstrap", "WebGL", "Cloud Architecture"]
+            "knowsAbout": ["Distributed Systems", "React 19", "React-Bootstrap", "WebGL", "Cloud Architecture"],
+            "sameAs": [
+              PERSONAL_INFO.github,
+              PERSONAL_INFO.linkedin,
+              PERSONAL_INFO.twitter
+            ]
           }
         }
       ]
@@ -172,7 +181,7 @@ export const GoogleSearchConsoleModal: React.FC<GoogleSearchConsoleModalProps> =
                 {/* Google Result Header */}
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-7 h-7 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-indigo-400 font-display">
-                    DV
+                    AN
                   </div>
                   <div>
                     <div className="text-xs text-[#bdc1c6] font-sans">

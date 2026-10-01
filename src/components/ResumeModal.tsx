@@ -38,7 +38,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ show, onHide }) => {
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(resumePayload, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', dataStr);
-    downloadAnchor.setAttribute('download', `Devin_Vance_CV_${new Date().getFullYear()}.json`);
+    downloadAnchor.setAttribute('download', `Anovardhan_CV_${new Date().getFullYear()}.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();

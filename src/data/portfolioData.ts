@@ -1,14 +1,14 @@
 import { Project, WorkExperience, SkillCategory, Article, Testimonial } from '../types/portfolio';
 
 export const PERSONAL_INFO = {
-  name: 'Devin Vance',
+  name: 'Anovardhan',
   title: 'Principal Software Engineer & Systems Architect',
   shortBio: 'Specializing in high-throughput distributed systems, modern React frontends, and production AI orchestration. Over 10 years scaling platforms from zero to 25M+ active users.',
   location: 'San Francisco, CA (Open to Remote)',
-  email: 'devin.vance.dev@gmail.com',
-  github: 'https://github.com/devin-vance',
-  linkedin: 'https://linkedin.com/in/devin-vance-arch',
-  twitter: 'https://x.com/devinvance_dev',
+  email: 'anovardhan18@gmail.com',
+  github: 'https://github.com/anovardhan',
+  linkedin: 'https://linkedin.com/in/anovardhan',
+  twitter: 'https://x.com/anovardhan',
   avatarUrl: '/src/assets/images/hero_avatar_portrait_1790837924816.jpg',
   yearsOfExperience: 10,
   patentsCount: 2,
@@ -39,8 +39,8 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ['React', 'TypeScript', 'WebGL', 'WebAssembly', 'WebSockets', 'Go', 'Redis'],
     featured: true,
-    githubUrl: 'https://github.com/devin-vance/krypton-terminal',
-    liveUrl: 'https://krypton-demo.devinvance.io',
+    githubUrl: 'https://github.com/anovardhan/krypton-terminal',
+    liveUrl: 'https://krypton-demo.anovardhan.io',
     stars: 1420,
     year: '2026'
   },
@@ -65,8 +65,8 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ['React 19', 'React-Bootstrap', 'TypeScript', 'Node.js', 'Python', 'FastAPI', 'Gemini API'],
     featured: true,
-    githubUrl: 'https://github.com/devin-vance/synapse-ai-studio',
-    liveUrl: 'https://synapse.devinvance.io',
+    githubUrl: 'https://github.com/anovardhan/synapse-ai-studio',
+    liveUrl: 'https://synapse.anovardhan.io',
     stars: 2850,
     year: '2025'
   },
@@ -91,8 +91,8 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ['React', 'React-Bootstrap', 'Tailwind CSS', 'TypeScript', 'Storybook', 'Vite'],
     featured: true,
-    githubUrl: 'https://github.com/devin-vance/strata-design-system',
-    liveUrl: 'https://strata.devinvance.io',
+    githubUrl: 'https://github.com/anovardhan/strata-design-system',
+    liveUrl: 'https://strata.anovardhan.io',
     stars: 940,
     year: '2025'
   },
@@ -117,8 +117,8 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ['React', 'Next.js / Vite', 'Node.js', 'PostgreSQL', 'Stripe', 'Tailwind'],
     featured: true,
-    githubUrl: 'https://github.com/devin-vance/atelier-commerce',
-    liveUrl: 'https://atelier.devinvance.io',
+    githubUrl: 'https://github.com/anovardhan/atelier-commerce',
+    liveUrl: 'https://atelier.anovardhan.io',
     stars: 670,
     year: '2024'
   }
@@ -278,8 +278,8 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Dr. Elena Rostova',
     role: 'VP of Engineering',
     company: 'Apex Cloud Platforms',
-    text: 'Devin is that rare 1-in-1,000 architect who can articulate high-level cloud topologies to our board and then sit down to write flawless, high-throughput React and Go code that handles billions of events.',
-    relationship: 'Managed Devin directly at Apex Cloud',
+    text: 'Anovardhan is that rare 1-in-1,000 architect who can articulate high-level cloud topologies to our board and then sit down to write flawless, high-throughput React and Go code that handles billions of events.',
+    relationship: 'Managed Anovardhan directly at Apex Cloud',
     year: '2026'
   },
   {
@@ -287,7 +287,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Marcus Sterling',
     role: 'Head of Product',
     company: 'Vertex AI Labs',
-    text: 'Our enterprise customers constantly praise the fluidity and speed of our AI studio canvas. Devin transformed a clunky prototype into a lightning-fast commercial powerhouse in under four months.',
+    text: 'Our enterprise customers constantly praise the fluidity and speed of our AI studio canvas. Anovardhan transformed a clunky prototype into a lightning-fast commercial powerhouse in under four months.',
     relationship: 'Worked closely on AI Product Squads',
     year: '2025'
   },
@@ -296,7 +296,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Sarah Chen-Kim',
     role: 'Staff Infrastructure Architect',
     company: 'Hyperion FinTech',
-    text: 'Devin set the engineering standard our teams still follow today. His dedication to low latency, resilient failover systems, and ultra-accessible frontends is unmatched.',
+    text: 'Anovardhan set the engineering standard our teams still follow today. His dedication to low latency, resilient failover systems, and ultra-accessible frontends is unmatched.',
     relationship: 'Collaborated across Core Platform Systems',
     year: '2024'
   }
