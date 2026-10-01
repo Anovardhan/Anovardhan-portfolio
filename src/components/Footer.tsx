@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ArrowUp, Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Twitter, Mail, Globe, Search } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenSearchConsole?: () => void;
+  onOpenSearch?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenSearchConsole, onOpenSearch }) => {
   const [timeStr, setTimeStr] = useState<string>('');
 
   useEffect(() => {
@@ -52,8 +57,22 @@ export const Footer: React.FC = () => {
             <div className="font-mono text-slate-400">
               San Francisco, CA · <span className="text-indigo-400 font-medium tabular-nums">{timeStr}</span>
             </div>
-            <div className="text-[11px] text-slate-500 mt-1">
-              Engineered with React 19 & React-Bootstrap
+            <div className="flex items-center justify-center gap-3 text-[11px] text-slate-500 mt-2">
+              <button
+                onClick={onOpenSearch}
+                className="text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
+              >
+                <Search className="w-3 h-3 text-indigo-400" />
+                <span>Search (⌘K)</span>
+              </button>
+              <span aria-hidden="true">·</span>
+              <button
+                onClick={onOpenSearchConsole}
+                className="text-slate-400 hover:text-emerald-400 flex items-center gap-1 transition-colors"
+              >
+                <Globe className="w-3 h-3 text-emerald-400" />
+                <span>Google Search Console & SEO</span>
+              </button>
             </div>
           </Col>
 
@@ -110,9 +129,11 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} Devin Vance. All rights reserved.
           </div>
           <div className="flex items-center gap-3">
-            <span>Production Build v4.2.0</span>
+            <span>Sitemap: /sitemap.xml</span>
             <span aria-hidden="true">·</span>
-            <span>Zero-Pill Typography Standard</span>
+            <span>Robots: /robots.txt</span>
+            <span aria-hidden="true">·</span>
+            <span>JSON-LD Schema Verified</span>
           </div>
         </div>
       </Container>

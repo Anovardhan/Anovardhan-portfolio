@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Container, Nav, Button, Offcanvas } from 'react-bootstrap';
-import { ArrowUpRight, FileText, Menu, X, Terminal, Sparkles } from 'lucide-react';
+import { ArrowUpRight, FileText, Menu, X, Terminal, Search, Globe } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface NavigationProps {
   onOpenResume: () => void;
   onOpenContact: () => void;
+  onOpenSearch: () => void;
+  onOpenSearchConsole: () => void;
 }
 
-export const Navigation: React.FC<NavigationProps> = ({ onOpenResume, onOpenContact }) => {
+export const Navigation: React.FC<NavigationProps> = ({
+  onOpenResume,
+  onOpenContact,
+  onOpenSearch,
+  onOpenSearchConsole,
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
@@ -48,7 +55,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenResume, onOpenCont
       }`}
     >
       <Container className="max-w-7xl">
-        {/* Zone 1: Wordmark Brand Title (Strict 1-line text element) */}
+        {/* Zone 1: Wordmark Brand Title */}
         <Navbar.Brand
           href="#home"
           onClick={(e) => {
@@ -61,19 +68,28 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenResume, onOpenCont
           <span className="font-display">{PERSONAL_INFO.name}</span>
         </Navbar.Brand>
 
-        {/* Mobile Toggle Button */}
-        <button
-          className="lg:hidden p-2 text-slate-300 hover:text-white bg-slate-900/60 border border-white/10 rounded-lg"
-          onClick={() => setShowOffcanvas(true)}
-          aria-label="Toggle navigation"
-        >
-          <Menu className="w-5 h-5" />
-        </button>
+        {/* Mobile Toggle & Quick Search Buttons */}
+        <div className="lg:hidden flex items-center gap-2">
+          <button
+            onClick={onOpenSearch}
+            className="p-2 text-slate-300 hover:text-white bg-slate-900/80 border border-white/10 rounded-lg"
+            aria-label="Search"
+          >
+            <Search className="w-4 h-4" />
+          </button>
+          <button
+            className="p-2 text-slate-300 hover:text-white bg-slate-900/80 border border-white/10 rounded-lg"
+            onClick={() => setShowOffcanvas(true)}
+            aria-label="Toggle navigation"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+        </div>
 
         {/* Zone 2 & 3: Desktop Nav Links and Actions */}
-        <Navbar.Collapse id="navbar-nav" className="hidden lg:flex justify-between items-center w-full ml-10">
-          {/* Zone 2: 4-6 Clean Text Links */}
-          <Nav className="mx-auto items-center gap-7 text-sm font-medium">
+        <Navbar.Collapse id="navbar-nav" className="hidden lg:flex justify-between items-center w-full ml-8">
+          {/* Zone 2: Clean Text Links */}
+          <Nav className="mx-auto items-center gap-6 text-sm font-medium">
             <Nav.Link
               href="#projects"
               onClick={(e) => { e.preventDefault(); scrollToSection('projects'); }}
@@ -112,17 +128,38 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenResume, onOpenCont
             </Nav.Link>
           </Nav>
 
-          {/* Zone 3: 1-2 Primary Actions */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Zone 3: Actions + Search Console & Quick Search */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            {/* Instant Search Palette Button */}
+            <button
+              onClick={onOpenSearch}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-white/10 hover:border-indigo-500/40 text-xs text-slate-400 hover:text-white transition-all shadow-sm"
+              title="Search Portfolio (Cmd+K)"
+            >
+              <Search className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Search...</span>
+              <kbd className="px-1.5 py-0.2 rounded bg-slate-800 text-[10px] text-slate-400 border border-white/5 font-mono">⌘K</kbd>
+            </button>
+
+            {/* Google Search Console Tool */}
+            <button
+              onClick={onOpenSearchConsole}
+              className="p-2 rounded-lg bg-slate-900 border border-white/10 hover:border-emerald-500/40 text-xs text-slate-300 hover:text-emerald-300 transition-colors"
+              title="Google Search Console & SEO Tools"
+            >
+              <Globe className="w-3.5 h-3.5 text-emerald-400" />
+            </button>
+
             <Button
               variant="outline-glow"
               size="sm"
               onClick={onOpenResume}
-              className="btn-outline-glow text-xs py-2 px-3.5 flex items-center gap-1.5 rounded-lg whitespace-nowrap"
+              className="btn-outline-glow text-xs py-2 px-3 flex items-center gap-1.5 rounded-lg whitespace-nowrap"
             >
               <FileText className="w-3.5 h-3.5 text-indigo-400" />
-              <span>Resume (CV)</span>
+              <span>Resume</span>
             </Button>
+
             <Button
               size="sm"
               onClick={() => {
@@ -130,7 +167,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenResume, onOpenCont
                 if (el) scrollToSection('contact');
                 else onOpenContact();
               }}
-              className="btn-accent text-xs py-2 px-4 flex items-center gap-1.5 rounded-lg whitespace-nowrap"
+              className="btn-accent text-xs py-2 px-3.5 flex items-center gap-1.5 rounded-lg whitespace-nowrap"
             >
               <span>Get in Touch</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -160,6 +197,20 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenResume, onOpenCont
           </Offcanvas.Header>
           <Offcanvas.Body className="p-6 flex flex-col justify-between">
             <div className="flex flex-col gap-4 text-base font-medium">
+              <button
+                onClick={() => { setShowOffcanvas(false); onOpenSearch(); }}
+                className="text-left py-2 text-indigo-400 hover:text-white border-b border-white/5 flex items-center gap-2 font-mono text-sm"
+              >
+                <Search className="w-4 h-4" />
+                <span>Search Everything (⌘K)</span>
+              </button>
+              <button
+                onClick={() => { setShowOffcanvas(false); onOpenSearchConsole(); }}
+                className="text-left py-2 text-emerald-400 hover:text-white border-b border-white/5 flex items-center gap-2 text-sm"
+              >
+                <Globe className="w-4 h-4" />
+                <span>Google Search Console & SEO</span>
+              </button>
               <button
                 onClick={() => scrollToSection('projects')}
                 className="text-left py-2 text-slate-300 hover:text-white border-b border-white/5"

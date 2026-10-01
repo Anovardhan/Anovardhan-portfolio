@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://devinvance.io/sitemap.xml

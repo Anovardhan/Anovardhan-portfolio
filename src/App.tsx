@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FirebaseProvider } from './context/FirebaseContext';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
@@ -17,9 +17,25 @@ import { GuestbookSection } from './components/GuestbookSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
+import { GoogleSearchConsoleModal } from './components/GoogleSearchConsoleModal';
+import { SearchPaletteModal } from './components/SearchPaletteModal';
 
 export default function App() {
   const [showResume, setShowResume] = useState(false);
+  const [showSearchConsole, setShowSearchConsole] = useState(false);
+  const [showSearchPalette, setShowSearchPalette] = useState(false);
+
+  // Global keyboard shortcut for search (Cmd+K / Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setShowSearchPalette((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const handleOpenContact = () => {
     const contactEl = document.getElementById('contact');
@@ -35,6 +51,8 @@ export default function App() {
         <Navigation
           onOpenResume={() => setShowResume(true)}
           onOpenContact={handleOpenContact}
+          onOpenSearch={() => setShowSearchPalette(true)}
+          onOpenSearchConsole={() => setShowSearchConsole(true)}
         />
 
         {/* Main Portfolio Content */}
@@ -62,12 +80,27 @@ export default function App() {
         </main>
 
         {/* Footer */}
-        <Footer />
+        <Footer
+          onOpenSearchConsole={() => setShowSearchConsole(true)}
+          onOpenSearch={() => setShowSearchPalette(true)}
+        />
 
         {/* Interactive Resume (CV) Modal */}
         <ResumeModal
           show={showResume}
           onHide={() => setShowResume(false)}
+        />
+
+        {/* Google Search Console & SEO Suite Modal */}
+        <GoogleSearchConsoleModal
+          show={showSearchConsole}
+          onHide={() => setShowSearchConsole(false)}
+        />
+
+        {/* Global Instant Search Palette (Cmd+K) */}
+        <SearchPaletteModal
+          show={showSearchPalette}
+          onHide={() => setShowSearchPalette(false)}
         />
       </div>
     </FirebaseProvider>
