@@ -1,0 +1,81 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Common Security Helpers
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Inquiries validation helper
+    function isValidInquiry(data) {
+      return data.keys().hasAll(['name', 'email', 'projectType', 'message', 'createdAt', 'status'])
+        && data.keys().hasOnly(['name', 'email', 'projectType', 'budget', 'timeline', 'message', 'createdAt', 'status'])
+        && data.name is string && data.name.size() >= 2 && data.name.size() <= 100
+        && data.email is string && data.email.size() >= 5 && data.email.size() <= 150
+        && data.projectType is string && data.projectType.size() <= 100
+        && (!('budget' in data) || (data.budget is string && data.budget.size() <= 50))
+        && (!('timeline' in data) || (data.timeline is string && data.timeline.size() <= 50))
+        && data.message is string && data.message.size() >= 5 && data.message.size() <= 2500
+        && data.createdAt is timestamp
+        && data.status in ['new', 'reviewed', 'archived'];
+    }
+
+    // Guestbook validation helper
+    function isValidGuestbookEntry(data) {
+      return data.keys().hasAll(['authorName', 'message', 'createdAt'])
+        && data.keys().hasOnly(['authorName', 'authorEmail', 'companyOrRole', 'message', 'createdAt'])
+        && data.authorName is string && data.authorName.size() >= 2 && data.authorName.size() <= 80
+        && (!('authorEmail' in data) || (data.authorEmail is string && data.authorEmail.size() <= 150))
+        && (!('companyOrRole' in data) || (data.companyOrRole is string && data.companyOrRole.size() <= 120))
+        && data.message is string && data.message.size() >= 3 && data.message.size() <= 1000
+        && data.createdAt is timestamp;
+    }
+
+    // Test connection endpoint for initial connectivity verification
+    match /test/{testId} {
+      allow read: if true;
+    }
+
+    // Inquiries collection
+    match /inquiries/{inquiryId} {
+      allow get, list: if isSignedIn();
+      allow create: if isValidId(inquiryId)
+        && isValidInquiry(incoming())
+        && incoming().status == 'new'
+        && incoming().createdAt == request.time;
+      allow update: if isSignedIn()
+        && isValidId(inquiryId)
+        && isValidInquiry(incoming())
+        && incoming().createdAt == existing().createdAt
+        && incoming().diff(existing()).affectedKeys().hasOnly(['status']);
+      allow delete: if isSignedIn() && isValidId(inquiryId);
+    }
+
+    // Guestbook endorsements
+    match /guestbook/{entryId} {
+      allow get, list: if true;
+      allow create: if isValidId(entryId)
+        && isValidGuestbookEntry(incoming())
+        && incoming().createdAt == request.time;
+      allow update, delete: if isSignedIn() && isValidId(entryId);
+    }
+  }
+}

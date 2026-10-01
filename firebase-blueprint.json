@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "A project or advisory inquiry submitted by a visitor through the portfolio contact form.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the sender.",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Work email address of the sender.",
+          "format": "email",
+          "maxLength": 150
+        },
+        "projectType": {
+          "type": "string",
+          "description": "Selected engagement or consultation type.",
+          "enum": [
+            "System Architecture & Review",
+            "Full-Stack Production Platform",
+            "React & Design System Rollout",
+            "Advisory / Fractional Principal Role",
+            "Speaking or Technical Workshop"
+          ]
+        },
+        "budget": {
+          "type": "string",
+          "description": "Budget estimation band.",
+          "maxLength": 50
+        },
+        "timeline": {
+          "type": "string",
+          "description": "Target project start timeline.",
+          "maxLength": 50
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed project brief or questions.",
+          "minLength": 5,
+          "maxLength": 2500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the inquiry was created on the server."
+        },
+        "status": {
+          "type": "string",
+          "description": "Processing status of the inquiry.",
+          "enum": ["new", "reviewed", "archived"]
+        }
+      },
+      "required": ["name", "email", "projectType", "message", "createdAt", "status"]
+    },
+    "GuestbookEntry": {
+      "title": "GuestbookEntry",
+      "description": "A public guestbook or endorsement message left by a visitor.",
+      "type": "object",
+      "properties": {
+        "authorName": {
+          "type": "string",
+          "description": "Name of the visitor.",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "authorEmail": {
+          "type": "string",
+          "description": "Email of the author.",
+          "format": "email",
+          "maxLength": 150
+        },
+        "companyOrRole": {
+          "type": "string",
+          "description": "Visitor's company, role, or title.",
+          "maxLength": 120
+        },
+        "message": {
+          "type": "string",
+          "description": "Endorsement or note.",
+          "minLength": 3,
+          "maxLength": 1000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the entry was created."
+        }
+      },
+      "required": ["authorName", "message", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": {
+        "$ref": "#/entities/Inquiry"
+      },
+      "description": "Stores inbound contact and consultation requests."
+    },
+    "/guestbook/{entryId}": {
+      "schema": {
+        "$ref": "#/entities/GuestbookEntry"
+      },
+      "description": "Stores visitor guestbook notes and endorsements."
+    }
+  }
+}
